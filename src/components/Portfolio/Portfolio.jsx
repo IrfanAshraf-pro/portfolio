@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Portfolio.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Sidebar from "../../img/sidebar.png";
@@ -9,8 +9,24 @@ import "swiper/css";
 import { themeContext } from "../../Context";
 
 const Portfolio = () => {
+	const [slides, setSlides] = useState(3);
+
 	const theme = useContext(themeContext);
 	const darkMode = theme.state.darkMode;
+
+	const handleResize = () => {
+		if (window.innerWidth >= 850) {
+			setSlides(3);
+		} else if (window.innerWidth < 850 && window.innerWidth > 550) {
+			setSlides(2);
+		} else if (window.innerWidth <= 550) {
+			setSlides(1);
+		}
+	};
+	useEffect(() => {
+		window.addEventListener("resize", handleResize);
+		handleResize();
+	}, [slides]);
 	return (
 		<div className="portfolio" id="portfolio">
 			{/* heading */}
@@ -19,7 +35,7 @@ const Portfolio = () => {
 			{/* swiper  */}
 			<Swiper
 				spaceBetween={30}
-				slidesPerView={3}
+				slidesPerView={slides}
 				grabCursor={true}
 				className="portfolio-slider"
 			>
