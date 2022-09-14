@@ -30,3 +30,14 @@
 	font-size: 0.8rem;
 	color: #5290fd;
 }
+.c-button:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+/* cards */
+
+@media screen and (max-width: 480px) {
+	.card {
+		width: 80%;
+	}
+}

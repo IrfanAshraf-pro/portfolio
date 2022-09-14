@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Intro.css";
 import Github from "../../img/github.png";
 import LinkedIn from "../../img/linkedin.png";
@@ -10,13 +10,17 @@ import thumbup from "../../img/thumbup.png";
 import crown from "../../img/crown.png";
 import glassesimoji from "../../img/glassesimoji.png";
 import FloatingDiv from "../FloatingDiv/FloatingDiv";
-
+import { themeContext } from "../../Context";
+import { motion } from "framer-motion";
 const Intro = () => {
+	const transition = { duration: 2, type: "spring" };
+	const theme = useContext(themeContext);
+	const darkMode = theme.state.darkMode;
 	return (
 		<div className="intro">
 			<div className="i-left">
 				<div className="i-name">
-					<span>Hy! I Am</span>
+					<span style={{ color: darkMode ? "white" : "" }}>Hy! I Am</span>
 					<span>Irfan Ashraf</span>
 					<span>
 						Frontend Developer with high level of experience in web designing
@@ -34,13 +38,29 @@ const Intro = () => {
 				<img src={Vector1} alt="vector1" />
 				<img src={Vector2} alt="vector2" />
 				<img src={boy} alt="boy" />
-				<img src={glassesimoji} alt="" />
-				<div className="crown-div">
+				<motion.img
+					initial={{ left: "-36%" }}
+					whileInView={{ left: "-24%" }}
+					transition={transition}
+					src={glassesimoji}
+					alt="glassemoji"
+				/>
+				<motion.div
+					initial={{ top: "-4%", left: "74%" }}
+					whileInView={{ left: "68%" }}
+					transition={transition}
+					className="crown-div floating-div"
+				>
 					<FloatingDiv image={crown} text1="Web" text2="Developer" />
-				</div>
-				<div className="thumb-div">
+				</motion.div>
+				<motion.div
+					initial={{ left: "9rem", top: "18rem" }}
+					whileInView={{ left: "0rem" }}
+					transition={transition}
+					className="thumb-div floating-div"
+				>
 					<FloatingDiv image={thumbup} text1="Best Design" text2="Award" />
-				</div>
+				</motion.div>
 				{/* Blur divs */}
 				<div className="blur" style={{ background: "rgb(238 210 255)" }}></div>
 				<div className="blur blur-blue" style={{ background: "#C1F5FF" }}></div>
